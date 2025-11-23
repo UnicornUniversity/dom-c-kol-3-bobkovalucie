@@ -6,6 +6,9 @@
  * @param {object} dtoIn contains count of employees, age limit of employees {min, max}
  * @returns {Array} of employees
  */
+
+
+
 const dtoIn = {
     count: 50,
     age: {
@@ -14,14 +17,14 @@ const dtoIn = {
     }
 }
 
+
+
 function getRandom (min, max){
     let randomNumber = undefined;
     randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
     return randomNumber;
 }
-function getRandomMilliseconds(min, max){
-    return min + Math.random() * (max - min);
-}
+
 function setEmployeeGender() {
     let genderNumber = getRandom(0,1);
     if (genderNumber === 1) {
@@ -80,11 +83,74 @@ function setWorkload(){
 }
 
 function generateBirthday(minAge,maxAge){
+/*
     let today = new Date()
     let todayInMilliseconds = today.getTime();
     let maxDate = todayInMilliseconds - maxAge*365.25*24*60*60*1000;
     let minDate = todayInMilliseconds - minAge*365.25*24*60*60*1000;
-    return new Date(getRandomMilliseconds(minDate,maxDate));
+
+    return new Date(getRandom(minDate,maxDate));*/
+
+
+
+    function getLatestDayOfBirth(minAge){
+        let today = new Date();
+        let minAgeInDays = 365.25*minAge;       // převedení minimálního možného věku na dny
+        let remainingDays = minAgeInDays - minAge*365;       // nastavení zbývajícího počtu dní po odečtení celých roků
+        let remainingHours = (remainingDays - Math.floor(remainingDays))*24; // nastavení zbýajícího počtu hodin po odečtení celých dní
+        remainingDays = Math.floor(remainingDays);
+
+        let latestBirthDay = new Date();
+        latestBirthDay.setFullYear(today.getFullYear()-minAge);        // nejpozdější možný rok narození
+        latestBirthDay.setDate(today.getDate()-remainingDays); // nejpozdější možné datum narození - měsíc + den
+        latestBirthDay.setHours(today.getHours()-remainingHours); //nejpozdější možná hodina narození
+
+        return latestBirthDay;
+    }
+    function getEarliestDayOfBirth(maxAge){
+        let today = new Date();
+        let maxAgeInDays = 365.25*maxAge;       // převedení maximálního možného věku na dny
+        let remainingDays = maxAgeInDays - maxAge*365;       // nastavení zbývajícího počtu dní po odečtení celých roků
+        let remainingHours = (remainingDays - Math.floor(remainingDays))*24; // nastavení zbýajícího počtu hodin po odečtení celých dní
+        remainingDays = Math.floor(remainingDays);
+
+        let earliestBirthDay = new Date();
+        earliestBirthDay.setFullYear(today.getFullYear()-maxAge);        // nejdřívější možný rok narození - odečtení celého počtu roků -365 dnů - od dnešního roku,
+        earliestBirthDay.setDate(today.getDate()-remainingDays); // nejdřívější datum narození odečtení zbývajícíh dní
+        earliestBirthDay.setHours(today.getHours()-remainingHours); //nejdřívější možná hodina naroezní
+
+        return earliestBirthDay;
+    }
+
+    let earliestDayOfBirth= getEarliestDayOfBirth(maxAge);
+    let latestDayOfBirth = getLatestDayOfBirth(minAge)
+    let randomYear = getRandom(earliestDayOfBirth.getFullYear(), latestDayOfBirth.getFullYear() )
+
+    function countOfDaysInMonth(monthIndex){
+        return new Date(randomYear, monthIndex, 0).getDate();
+
+    }
+
+    let randomMonth;
+    let randomDay;
+    let randomHour;
+
+    if (randomYear===earliestDayOfBirth.getFullYear()){
+        randomMonth = getRandom(earliestDayOfBirth.getMonth(), 11);
+        randomDay = getRandom(earliestDayOfBirth.getDate(), countOfDaysInMonth(randomMonth));
+        randomHour = getRandom(earliestDayOfBirth.getHours(), 23);
+    }
+    else if (randomYear===latestDayOfBirth.getFullYear()){
+        randomMonth = getRandom(0, latestDayOfBirth.getMonth());
+        randomDay =  getRandom(1, latestDayOfBirth.getDate());
+        randomHour = getRandom(0, latestDayOfBirth.getHours());
+    }
+    else{
+        randomMonth = getRandom(0, 11);
+        randomDay = getRandom(1,countOfDaysInMonth(randomMonth));
+        randomHour = getRandom(0,23)
+    }
+    return new Date(randomYear, randomMonth, randomDay, randomHour);
 }
 
 function generateEmployee(minAge,maxAge){
@@ -102,6 +168,7 @@ function generateEmployee(minAge,maxAge){
     employee.workload = setWorkload();
    return employee;
 }
+
 export function main(dtoIn) {
   const dtoOut = [
 
