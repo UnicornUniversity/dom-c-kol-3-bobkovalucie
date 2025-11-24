@@ -48,7 +48,7 @@ function generateName (gender){
         nameNumber = getRandom(0,maleNames.length-1);
         surnameNumber = getRandom(0,maleSurnames.length-1);
         return {
-            firstName: maleNames[nameNumber],
+            name: maleNames[nameNumber],
             surname: maleSurnames[surnameNumber]
         }
 
@@ -57,7 +57,7 @@ function generateName (gender){
         const femaleNames = [
             "Marie", "Jana", "Eva", "Anna", "Hana", "Lucie", "Kateřina", "Tereza", "Petra", "Lenka", "Veronika", "Markéta", "Monika", "Alena", "Barbora", "Klára", "Michaela", "Adéla", "Karolína", "Zuzana",
             "Eliška", "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena", "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula", "Dominika", "Sandra", "Lada", "Radka",
-            "Emilie", "Sabina", "Věra", "Andrea", "Stela", "Růžena", "Laura", "Sofie"
+            "Emilie", "Sabina", "Věra", "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara", "Patricie"
         ]
         const femaleSurnames = [
             "Nováková", "Svobodová", "Novotná", "Dvořáková", "Černá", "Procházková", "Kučerová", "Veselá", "Horáková", "Němcová", "Marková", "Pospíšilová", "Pokorná", "Hájková", "Jelínková", "Růžičková", "Benešová", "Fialová", "Sedláčková", "Doležalová",
@@ -67,7 +67,7 @@ function generateName (gender){
         nameNumber = getRandom(0,femaleNames.length-1);
         surnameNumber = getRandom(0,femaleSurnames.length-1);
         return {
-            firstName: femaleNames[nameNumber],
+            name: femaleNames[nameNumber],
             surname: femaleSurnames[surnameNumber]
         }
 
@@ -97,7 +97,7 @@ function generateEmployee(minAge,maxAge){
         workload: "",
     }
     employee.gender = setEmployeeGender();
-    employee.name = generateName(employee.gender).firstName;
+    employee.name = generateName(employee.gender).name;
     employee.surname = generateName(employee.gender).surname;
     employee.birthdate = generateBirthday(minAge, maxAge);
     employee.workload = setWorkload();
