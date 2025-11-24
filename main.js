@@ -111,7 +111,7 @@ function generateBirthday(minAge,maxAge){
     let maxDate = todayInMilliseconds - maxAge*365.25*24*60*60*1000;
     let minDate = todayInMilliseconds - minAge*365.25*24*60*60*1000;
 
-    return new Date(getRandom(minDate,maxDate)).toISOString();
+    return new Date(getRandom(minDate,maxDate));
 }
 
 function generateEmployee(minAge,maxAge){
@@ -140,7 +140,7 @@ export function main(dtoIn) {
             let samePerson = {
                 sameName: dtoOut[i].name === dtoOut[j].name,
                 sameSurname: dtoOut[i].surname === dtoOut[j].surname,
-                sameBirthdate: dtoOut[i].birthdate===dtoOut[j].birthdate,
+                sameBirthdate: dtoOut[i].birthdate.getTime()===dtoOut[j].birthdate.getTime(),
             }
             if (samePerson.sameName && samePerson.sameSurname && samePerson.sameBirthdate) { // pokud se jedná o stejnou osobu, vygeneruje se osoba na pozici "i" znovu
                 dtoOut[i]=generateEmployee(dtoIn.age.min, dtoIn.age.max);
@@ -152,4 +152,3 @@ export function main(dtoIn) {
 
     return dtoOut;
 }
-
