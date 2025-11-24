@@ -37,7 +37,7 @@ function generateName (gender){
     if(gender === "male"){
         const maleNames = [
             "Jan", "Petr", "Josef", "Pavel", "Martin", "Tomáš", "Jaroslav", "Miroslav", "Jiří", "Karel", "Lukáš", "Václav", "Ondřej", "Michal", "Roman", "David", "Marek", "Radek", "Jakub", "Zdeněk",  "Stanislav", "František", "Aleš", "Daniel", "Libor", "Vladimír", "Filip", "Adam", "Richard", "Robert", "Štěpán", "Ladislav", "Vojtěch", "Bohumil", "Matěj", "Milan", "Patrik",
-            "Rostislav", "Erik", "Jindřich", "Dominik", "Eduard", "Antonín", "Samuel", "Hynek", "Tadeáš", "Oldřich", "Rudolf", "Branislav", "Leoš"
+            "Erik", "Jindřich", "Dominik", "Eduard", "Antonín", "Samuel", "Hynek", "Tadeáš", "Oldřich", "Rudolf", "Branislav", "Leoš"
         ];
         nameNumber = getRandom(0,maleNames.length-1);
         return maleNames[nameNumber];
@@ -46,7 +46,7 @@ function generateName (gender){
         const femaleNames = [
             "Marie", "Jana", "Eva", "Anna", "Hana", "Lucie", "Kateřina", "Tereza", "Petra", "Lenka", "Veronika", "Markéta", "Monika", "Alena", "Barbora", "Klára", "Michaela", "Adéla", "Karolína", "Zuzana",
             "Helena", "Eliška", "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena", "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula", "Dominika", "Sandra", "Lada", "Radka",
-            "Blanka", "Emilie", "Sabina", "Věra", "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
+            "Emilie", "Sabina", "Věra", "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
         ]
         nameNumber = getRandom(0,femaleNames.length-1);
         return femaleNames[nameNumber]
@@ -57,7 +57,7 @@ function generateSurname (gender){
 
     if(gender === "male"){
         const maleSurnames = [
-            "Novák", "Svoboda", "Novotný", "Dvořák", "Černý", "Procházka", "Kučera", "Veselý", "Horák", "Němec", "Marek", "Pospíšil", "Pokorný", "Hájek", "Jelínek",
+            "Novák", "Svoboda", "Novotný", "Dvořák", "Černý", "Procházka", "Kučera", "Veselý", "Horák", "Němec", "Pospíšil", "Pokorný", "Hájek", "Jelínek",
             "Růžička", "Beneš", "Fiala", "Sedláček", "Doležal", "Zeman", "Kolář", "Navrátil", "Čermák", "Vaněk", "Urban", "Král", "Bartoš", "Kovář", "Kříž", "Šťastný", "Nedvěd", "Malý", "Mach", "Šimek", "Konečný", "Slavík", "Bláha", "Moravec", "Zima",
             "Štěpánek", "Bednář", "Bureš", "Holub", "Sýkora", "Ptáček", "Richter", "Toman", "Musil", "Vlček"
         ];
@@ -67,7 +67,7 @@ function generateSurname (gender){
     else{
         const femaleSurnames = [
             "Nováková", "Svobodová", "Novotná", "Dvořáková", "Černá", "Procházková", "Kučerová", "Veselá", "Horáková", "Němcová", "Marková", "Pospíšilová", "Pokorná", "Hájková", "Jelínková", "Růžičková", "Benešová", "Fialová", "Sedláčková", "Doležalová",
-            "Zemanová", "Kolářová", "Navrátilová", "Čermáková", "Vaňková", "Urbanová", "Králová", "Bartošová", "Kovářová", "Křížová", "Šťastná", "Nedvědová", "Malá", "Machová", "Šimková", "Konečná", "Slavíková", "Bláhová", "Moravcová", "Zimová",
+            "Zemanová", "Kolářová", "Navrátilová", "Čermáková", "Vaňková", "Urbanová", "Králová", "Bartošová", "Kovářová", "Křížová", "Šťastná", "Nedvědová", "Malá", "Šimková", "Konečná", "Slavíková", "Bláhová", "Moravcová", "Zimová",
             "Štěpánková", "Bednářová", "Burešová", "Holubová", "Sýkorová", "Ptáčková", "Richterová", "Tomanová", "Musilová", "Vlčková"
         ];
         surnameNumber = getRandom(0, femaleSurnames.length-1);
