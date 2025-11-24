@@ -56,7 +56,7 @@ function generateName (gender){
             "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena",
             "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula",
             "Dominika", "Sandra", "Lada", "Radka", "Blanka", "Emilie", "Sabina", "Věra",
-            "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
+            "Andrea", "Stela", "Růžena", "Laura"
         ]
         nameNumber = getRandom(0,femaleNames.length-1);
         return femaleNames[nameNumber]
