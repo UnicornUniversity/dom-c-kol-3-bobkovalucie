@@ -1,7 +1,7 @@
 //TODO add imports if needed
 //TODO doc
 /**
- * The main function which calls the application. 
+ * The main function which calls the application.
  * Please, add specific description here for the application purpose.
  * @param {object} dtoIn contains count of employees, age limit of employees {min, max}
  * @returns {Array} of employees
@@ -33,6 +33,7 @@ function setEmployeeGender() {
 }
 function generateName (gender){
     let nameNumber;
+    let surnameNumber;
 
     if(gender === "male"){
         const maleNames = [
@@ -46,11 +47,11 @@ function generateName (gender){
         ];
         nameNumber = getRandom(0,maleNames.length-1);
         surnameNumber = getRandom(0,maleSurnames.length-1);
-        let name = {
+        return {
             firstName: maleNames[nameNumber],
             surname: maleSurnames[surnameNumber]
         }
-        return name;
+
     }
     else{
         const femaleNames = [
@@ -65,11 +66,11 @@ function generateName (gender){
         ];
         nameNumber = getRandom(0,femaleNames.length-1);
         surnameNumber = getRandom(0,femaleSurnames.length-1);
-        let name = {
+        return {
             firstName: femaleNames[nameNumber],
             surname: femaleSurnames[surnameNumber]
         }
-        return name;
+
     }
 }
 
@@ -100,16 +101,30 @@ function generateEmployee(minAge,maxAge){
     employee.surname = generateName(employee.gender).surname;
     employee.birthdate = generateBirthday(minAge, maxAge);
     employee.workload = setWorkload();
-   return employee;
+    return employee;
 }
 
 export function main(dtoIn) {
-  const dtoOut = [
+    const dtoOut = [
 
     ]
     for (let i =0; i < dtoIn.count; i++) {
         dtoOut[i]=generateEmployee(dtoIn.age.min, dtoIn.age.max);
+        for (let j =0; j < i; j++) {                                            //kontrola stejného jména, přijmení a data narození
+            let samePerson = {
+                sameName: dtoOut[i].name === dtoOut[j].name,
+                sameSurname: dtoOut[i].surname === dtoOut[j].surname,
+                sameBirthdate: dtoOut[i].birthdate===dtoOut[j].birthdate,
+            }
+            if (samePerson.sameName && samePerson.sameSurname && samePerson.sameBirthdate) { // pokud se jedná o stejnou osobu, vygeneruje se osoba na pozici "i" znovu
+                dtoOut[i]=generateEmployee(dtoIn.age.min, dtoIn.age.max);
+                j=-1; // restart kontrolního cyklu for, po ukončení tohoto běhu se automaticky j zvedne na 0, a aby se nově vytvořený zaměstnanace porovnal se všemi už vytvořenými
+            }
+        }
+
     }
+
     return dtoOut;
 }
 
+console.log(main(dtoIn));
