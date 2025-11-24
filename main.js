@@ -45,8 +45,8 @@ function generateName (gender){
     else{
         const femaleNames = [
             "Marie", "Jana", "Eva", "Anna", "Hana", "Lucie", "Kateřina", "Tereza", "Petra", "Lenka", "Veronika", "Markéta", "Monika", "Alena", "Barbora", "Klára", "Michaela", "Adéla", "Karolína", "Zuzana",
-            "Helena", "Eliška", "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena", "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula", "Dominika", "Sandra", "Lada", "Radka",
-            "Emilie", "Sabina", "Věra", "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
+            "Eliška", "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena", "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula", "Dominika", "Sandra", "Lada", "Radka",
+            "Emilie", "Sabina", "Věra", "Andrea", "Stela", "Růžena", "Laura", "Sofie"
         ]
         nameNumber = getRandom(0,femaleNames.length-1);
         return femaleNames[nameNumber]
