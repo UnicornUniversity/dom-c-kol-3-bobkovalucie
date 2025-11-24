@@ -56,7 +56,7 @@ function generateName (gender){
             "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena",
             "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula",
             "Dominika", "Sandra", "Lada", "Radka", "Blanka", "Emilie", "Sabina", "Věra",
-            "Andrea", "Stela", "Růžena", "Laura"
+            "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
         ]
         nameNumber = getRandom(0,femaleNames.length-1);
         return femaleNames[nameNumber]
@@ -111,7 +111,7 @@ function generateBirthday(minAge,maxAge){
     let maxDate = todayInMilliseconds - maxAge*365.25*24*60*60*1000;
     let minDate = todayInMilliseconds - minAge*365.25*24*60*60*1000;
 
-    return new Date(getRandom(minDate,maxDate));
+    return new Date(getRandom(minDate,maxDate)).toISOString();
 }
 
 function generateEmployee(minAge,maxAge){
@@ -140,7 +140,7 @@ export function main(dtoIn) {
             let samePerson = {
                 sameName: dtoOut[i].name === dtoOut[j].name,
                 sameSurname: dtoOut[i].surname === dtoOut[j].surname,
-                sameBirthdate: dtoOut[i].birthdate.getTime()===dtoOut[j].birthdate.getTime(),
+                sameBirthdate: dtoOut[i].birthdate===dtoOut[j].birthdate,
             }
             if (samePerson.sameName && samePerson.sameSurname && samePerson.sameBirthdate) { // pokud se jedná o stejnou osobu, vygeneruje se osoba na pozici "i" znovu
                 dtoOut[i]=generateEmployee(dtoIn.age.min, dtoIn.age.max);
