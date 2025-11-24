@@ -7,8 +7,6 @@
  * @returns {Array} of employees
  */
 
-
-
 const dtoIn = {
     count: 50,
     age: {
@@ -16,8 +14,6 @@ const dtoIn = {
         max: 35
     }
 }
-
-
 
 function getRandom (min, max){
     let randomNumber = undefined;
@@ -97,13 +93,13 @@ function generateEmployee(minAge,maxAge){
         name: "",
         surname: "",
         gender: "",
-        birthday: "",
+        birthdate: "",
         workload: "",
     }
     employee.gender = setEmployeeGender();
     employee.name = generateName(employee.gender);
     employee.surname = generateSurname(employee.gender);
-    employee.birthday = generateBirthday(minAge, maxAge);
+    employee.birthdate = generateBirthday(minAge, maxAge);
     employee.workload = setWorkload();
    return employee;
 }
