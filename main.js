@@ -45,9 +45,10 @@ function generateName (gender){
             "Štěpánek", "Bednář", "Bureš", "Holub", "Sýkora", "Ptáček", "Richter", "Toman", "Musil", "Vlček"
         ];
         nameNumber = getRandom(0,maleNames.length-1);
+        surnameNumber = getRandom(0,maleSurnames.length-1);
         let name = {
             firstName: maleNames[nameNumber],
-            surname: maleSurnames[nameNumber]
+            surname: maleSurnames[surnameNumber]
         }
         return name;
     }
@@ -63,9 +64,10 @@ function generateName (gender){
             "Štěpánková", "Bednářová", "Burešová", "Holubová", "Sýkorová", "Ptáčková", "Richterová", "Tomanová", "Musilová", "Vlčková"
         ];
         nameNumber = getRandom(0,femaleNames.length-1);
-         let name = {
+        surnameNumber = getRandom(0,femaleSurnames.length-1);
+        let name = {
             firstName: femaleNames[nameNumber],
-            surname: femaleSurnames[nameNumber]
+            surname: femaleSurnames[surnameNumber]
         }
         return name;
     }
