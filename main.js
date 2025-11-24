@@ -85,7 +85,7 @@ function generateBirthday(minAge,maxAge){
     let maxDate = todayInMilliseconds - maxAge*365.25*24*60*60*1000;
     let minDate = todayInMilliseconds - minAge*365.25*24*60*60*1000;
 
-    return new Date(getRandom(minDate,maxDate));
+    return new Date(getRandom(minDate,maxDate)).toISOString;
 }
 
 function generateEmployee(minAge,maxAge){
