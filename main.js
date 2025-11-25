@@ -7,8 +7,48 @@
  * @returns {Array} of employees
  */
 
+const maleNames = [
+    "Jan", "Petr", "Josef", "Pavel", "Martin", "Tomáš", "Jaroslav",
+    "Miroslav", "Jiří", "Karel", "Lukáš", "Václav", "Ondřej", "Michal",
+    "Roman", "David", "Marek", "Radek", "Jakub", "Zdeněk", "Stanislav",
+    "František", "Aleš", "Daniel", "Libor", "Vladimír", "Filip", "Adam",
+    "Richard", "Robert", "Štěpán", "Ladislav", "Vojtěch", "Bohumil",
+    "Matěj", "Milan", "Patrik", "Rostislav", "Erik", "Jindřich",
+    "Dominik", "Eduard", "Antonín", "Samuel", "Hynek", "Tadeáš",
+    "Oldřich", "Rudolf", "Branislav", "Leoš"
+];
+const femaleNames = [
+    "Marie", "Jana", "Eva", "Anna", "Hana", "Lucie", "Kateřina", "Tereza",
+    "Petra", "Lenka", "Veronika", "Markéta", "Monika", "Alena", "Barbora",
+    "Klára", "Michaela", "Adéla", "Karolína", "Zuzana", "Helena", "Eliška",
+    "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena",
+    "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula",
+    "Dominika", "Sandra", "Lada", "Radka", "Blanka", "Emilie", "Sabina", "Věra",
+    "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
+];
+const maleSurnames = [
+    "Novák", "Svoboda", "Novotný", "Dvořák", "Černý", "Procházka", "Kučera",
+    "Veselý", "Horák", "Němec", "Marek", "Pospíšil", "Pokorný", "Hájek",
+    "Jelínek", "Růžička", "Beneš", "Fiala", "Sedláček", "Doležal", "Zeman",
+    "Kolář", "Navrátil", "Čermák", "Vaněk", "Urban", "Král", "Bartoš",
+    "Kovář", "Kříž", "Šťastný", "Nedvěd", "Malý", "Mach", "Šimek",
+    "Konečný", "Slavík", "Bláha", "Moravec", "Zima", "Štěpánek", "Bednář",
+    "Bureš", "Holub", "Sýkora", "Ptáček", "Richter", "Toman", "Musil", "Vlček"
+];
+const femaleSurnames = [
+    "Nováková", "Svobodová", "Novotná", "Dvořáková", "Černá", "Procházková",
+    "Kučerová", "Veselá", "Horáková", "Němcová", "Marková", "Pospíšilová",
+    "Pokorná", "Hájková", "Jelínková", "Růžičková", "Benešová", "Fialová",
+    "Sedláčková", "Doležalová", "Zemanová", "Kolářová", "Navrátilová",
+    "Čermáková", "Vaňková", "Urbanová", "Králová", "Bartošová", "Kovářová",
+    "Křížová", "Šťastná", "Nedvědová", "Malá", "Machová", "Šimková", "Konečná",
+    "Slavíková", "Bláhová", "Moravcová", "Zimová", "Štěpánková", "Bednářová",
+    "Burešová", "Holubová", "Sýkorová", "Ptáčková", "Richterová", "Tomanová",
+    "Musilová", "Vlčková"
+];
+
 const dtoIn = {
-    count: 50,
+    count: 150,
     age: {
         min: 19,
         max: 35
@@ -16,9 +56,7 @@ const dtoIn = {
 }
 
 function getRandom (min, max){
-    let randomNumber = undefined;
-    randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    return randomNumber;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function setEmployeeGender() {
@@ -31,73 +69,66 @@ function setEmployeeGender() {
     }
 
 }
-function generateName (gender){
+function generateName (gender) {
     let nameNumber;
-    if(gender === "male"){
-        const maleNames = [
-            "Jan", "Petr", "Josef", "Pavel", "Martin", "Tomáš", "Jaroslav",
-            "Miroslav", "Jiří", "Karel", "Lukáš", "Václav", "Ondřej", "Michal",
-            "Roman", "David", "Marek", "Radek", "Jakub", "Zdeněk", "Stanislav",
-            "František", "Aleš", "Daniel", "Libor", "Vladimír", "Filip", "Adam",
-            "Richard", "Robert", "Štěpán", "Ladislav", "Vojtěch", "Bohumil",
-            "Matěj", "Milan", "Patrik", "Rostislav", "Erik", "Jindřich",
-            "Dominik", "Eduard", "Antonín", "Samuel", "Hynek", "Tadeáš",
-            "Oldřich", "Rudolf", "Branislav", "Leoš" ];
+    let nameOut;
 
+    if(gender === "male"){
+        if(maleNames.length === 0) {
+            console.log("Error: One or more name lists are empty");
+            process.exit(1);
+        }
         nameNumber = getRandom(0,maleNames.length-1);
-        return maleNames[nameNumber];
+        nameOut = maleNames[nameNumber];
+        maleNames[nameNumber] = maleNames[maleNames.length-1];
+        maleNames.pop();
+
+        return nameOut;
     }
 
     else{
-        const femaleNames = [
-            "Marie", "Jana", "Eva", "Anna", "Hana", "Lucie", "Kateřina", "Tereza",
-            "Petra", "Lenka", "Veronika", "Markéta", "Monika", "Alena", "Barbora",
-            "Klára", "Michaela", "Adéla", "Karolína", "Zuzana", "Helena", "Eliška",
-            "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena",
-            "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula",
-            "Dominika", "Sandra", "Lada", "Radka", "Blanka", "Emilie", "Sabina", "Věra",
-            "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
-        ]
+        if(femaleNames.length === 0) {
+            console.log("Error: One or more name lists are empty");
+            process.exit(1);
+        }
+
         nameNumber = getRandom(0,femaleNames.length-1);
-        return femaleNames[nameNumber]
+        nameOut = femaleNames[nameNumber];
+        femaleNames[nameNumber] = femaleNames[femaleNames.length-1];
+        femaleNames.pop();
+
+        return nameOut;
     }
 }
 
 function generateSurname (gender){
     let surnameNumber;
+    let surnameOut;
     if(gender === "male"){
-        const maleSurnames = [
-            "Novák", "Svoboda", "Novotný", "Dvořák", "Černý", "Procházka", "Kučera",
-            "Veselý", "Horák", "Němec", "Marek", "Pospíšil", "Pokorný", "Hájek",
-            "Jelínek", "Růžička", "Beneš", "Fiala", "Sedláček", "Doležal", "Zeman",
-            "Kolář", "Navrátil", "Čermák", "Vaněk", "Urban", "Král", "Bartoš",
-            "Kovář", "Kříž", "Šťastný", "Nedvěd", "Malý", "Mach", "Šimek",
-            "Konečný", "Slavík", "Bláha", "Moravec", "Zima", "Štěpánek", "Bednář",
-            "Bureš", "Holub", "Sýkora", "Ptáček", "Richter", "Toman", "Musil", "Vlček"
-        ];
+        if(maleSurnames.length === 0) {
+            console.log("Error: One or more name lists are empty");
+            process.exit(1);
+        }
         surnameNumber = getRandom(0, maleSurnames.length-1);
-        return maleSurnames[surnameNumber];
+        surnameOut = maleSurnames[surnameNumber];
+        maleSurnames[surnameNumber] = maleSurnames[maleSurnames.length-1];
+        maleSurnames.pop();
+        return surnameOut;
     }
 
     else{
-        const femaleSurnames = [
-            "Nováková", "Svobodová", "Novotná", "Dvořáková", "Černá", "Procházková",
-            "Kučerová", "Veselá", "Horáková", "Němcová", "Marková", "Pospíšilová",
-            "Pokorná", "Hájková", "Jelínková", "Růžičková", "Benešová", "Fialová",
-            "Sedláčková", "Doležalová", "Zemanová", "Kolářová", "Navrátilová",
-            "Čermáková", "Vaňková", "Urbanová", "Králová", "Bartošová", "Kovářová",
-            "Křížová", "Šťastná", "Nedvědová", "Malá", "Machová", "Šimková", "Konečná",
-            "Slavíková", "Bláhová", "Moravcová", "Zimová", "Štěpánková", "Bednářová",
-            "Burešová", "Holubová", "Sýkorová", "Ptáčková", "Richterová", "Tomanová",
-            "Musilová", "Vlčková"
-        ];
+
+        if(femaleSurnames.length === 0) {
+            console.log("Error: One or more name lists are empty");
+            process.exit(1);
+        }
         surnameNumber = getRandom(0, femaleSurnames.length-1);
-        return femaleSurnames[surnameNumber]
+        surnameOut = femaleSurnames[surnameNumber];
+        femaleSurnames[surnameNumber] = femaleSurnames[femaleSurnames.length-1];
+        femaleSurnames.pop();
+        return surnameOut;
     }
 }
-
-
-
 
 
 function setWorkload(){
@@ -114,7 +145,7 @@ function generateBirthday(minAge,maxAge){
     return new Date(getRandom(minDate,maxDate)).toISOString();
 }
 
-function generateEmployee(minAge,maxAge){
+function generateEmployee(minAge,maxAge, number){
     let employee = {
         name: "",
         surname: "",
@@ -122,11 +153,13 @@ function generateEmployee(minAge,maxAge){
         birthdate: "",
         workload: "",
     }
+    employee.number = number;
     employee.gender = setEmployeeGender();
     employee.name = generateName(employee.gender);
     employee.surname = generateSurname(employee.gender);
     employee.birthdate = generateBirthday(minAge, maxAge);
     employee.workload = setWorkload();
+
     return employee;
 }
 
@@ -135,8 +168,9 @@ export function main(dtoIn) {
 
     ]
     for (let i =0; i < dtoIn.count; i++) {
-        dtoOut[i]=generateEmployee(dtoIn.age.min, dtoIn.age.max);
-        for (let j =0; j < i; j++) {                                            //kontrola stejného jména, přijmení a data narození
+        dtoOut[i] = generateEmployee(dtoIn.age.min, dtoIn.age.max,i);
+    }
+        /*for (let j =0; j < i; j++) {                                            //kontrola stejného jména, přijmení a data narození
             let samePerson = {
                 sameName: dtoOut[i].name === dtoOut[j].name,
                 sameSurname: dtoOut[i].surname === dtoOut[j].surname,
@@ -145,10 +179,9 @@ export function main(dtoIn) {
             if (samePerson.sameName && samePerson.sameSurname && samePerson.sameBirthdate) { // pokud se jedná o stejnou osobu, vygeneruje se osoba na pozici "i" znovu
                 dtoOut[i]=generateEmployee(dtoIn.age.min, dtoIn.age.max);
                 j=-1; // restart kontrolního cyklu for, po ukončení tohoto běhu se automaticky j zvedne na 0, a aby se nově vytvořený zaměstnanace porovnal se všemi už vytvořenými
-            }
-        }
+            }*/
 
-    }
 
     return dtoOut;
 }
+
