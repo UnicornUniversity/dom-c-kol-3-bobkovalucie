@@ -10,48 +10,34 @@
 const maleNames = [
     "Jan", "Petr", "Josef", "Pavel", "Martin", "Tomáš", "Jaroslav",
     "Miroslav", "Jiří", "Karel", "Lukáš", "Václav", "Ondřej", "Michal",
-    "Roman", "David", "Marek", "Radek", "Jakub", "Zdeněk", "Stanislav",
-    "František", "Aleš", "Daniel", "Libor", "Vladimír", "Filip", "Adam",
-    "Richard", "Robert", "Štěpán", "Ladislav", "Vojtěch", "Bohumil",
-    "Matěj", "Milan", "Patrik", "Rostislav", "Erik", "Jindřich",
-    "Dominik", "Eduard", "Antonín", "Samuel", "Hynek", "Tadeáš",
+    "Roman", "David", "Eduard", "Antonín", "Samuel", "Hynek", "Tadeáš",
     "Oldřich", "Rudolf", "Branislav", "Leoš"
 ];
 const femaleNames = [
     "Marie", "Jana", "Eva", "Anna", "Hana", "Lucie", "Kateřina", "Tereza",
     "Petra", "Lenka", "Veronika", "Markéta", "Monika", "Alena", "Barbora",
     "Klára", "Michaela", "Adéla", "Karolína", "Zuzana", "Helena", "Eliška",
-    "Kristýna", "Daniela", "Ivana", "Martina", "Šárka", "Dagmar", "Božena",
-    "Nikola", "Renata", "Gabriela", "Simona", "Irena", "Natálie", "Vendula",
-    "Dominika", "Sandra", "Lada", "Radka", "Blanka", "Emilie", "Sabina", "Věra",
-    "Andrea", "Stela", "Růžena", "Laura", "Sofie", "Tamara"
+    "Kristýna", "Daniela", "Ivana"
 ];
 const maleSurnames = [
     "Novák", "Svoboda", "Novotný", "Dvořák", "Černý", "Procházka", "Kučera",
     "Veselý", "Horák", "Němec", "Marek", "Pospíšil", "Pokorný", "Hájek",
     "Jelínek", "Růžička", "Beneš", "Fiala", "Sedláček", "Doležal", "Zeman",
-    "Kolář", "Navrátil", "Čermák", "Vaněk", "Urban", "Král", "Bartoš",
-    "Kovář", "Kříž", "Šťastný", "Nedvěd", "Malý", "Mach", "Šimek",
-    "Konečný", "Slavík", "Bláha", "Moravec", "Zima", "Štěpánek", "Bednář",
-    "Bureš", "Holub", "Sýkora", "Ptáček", "Richter", "Toman", "Musil", "Vlček"
+    "Kolář", "Navrátil", "Čermák", "Vaněk"
 ];
 const femaleSurnames = [
     "Nováková", "Svobodová", "Novotná", "Dvořáková", "Černá", "Procházková",
     "Kučerová", "Veselá", "Horáková", "Němcová", "Marková", "Pospíšilová",
     "Pokorná", "Hájková", "Jelínková", "Růžičková", "Benešová", "Fialová",
     "Sedláčková", "Doležalová", "Zemanová", "Kolářová", "Navrátilová",
-    "Čermáková", "Vaňková", "Urbanová", "Králová", "Bartošová", "Kovářová",
-    "Křížová", "Šťastná", "Nedvědová", "Malá", "Machová", "Šimková", "Konečná",
-    "Slavíková", "Bláhová", "Moravcová", "Zimová", "Štěpánková", "Bednářová",
-    "Burešová", "Holubová", "Sýkorová", "Ptáčková", "Richterová", "Tomanová",
-    "Musilová", "Vlčková"
+    "Čermáková", "Vaňková"
 ];
 
 const dtoIn = {
     count: 150,
     age: {
-        min: 19,
-        max: 35
+        min: 35,
+        max: 85
     }
 }
 
@@ -70,63 +56,21 @@ function setEmployeeGender() {
 
 }
 function generateName (gender) {
-    let nameNumber;
-    let nameOut;
-
     if(gender === "male"){
-        if(maleNames.length === 0) {
-            console.log("Error: One or more name lists are empty");
-            process.exit(1);
+        return maleNames[getRandom(0, maleNames.length-1)];
         }
-        nameNumber = getRandom(0,maleNames.length-1);
-        nameOut = maleNames[nameNumber];
-        maleNames[nameNumber] = maleNames[maleNames.length-1];
-        maleNames.pop();
-
-        return nameOut;
-    }
-
     else{
-        if(femaleNames.length === 0) {
-            console.log("Error: One or more name lists are empty");
-            process.exit(1);
-        }
-
-        nameNumber = getRandom(0,femaleNames.length-1);
-        nameOut = femaleNames[nameNumber];
-        femaleNames[nameNumber] = femaleNames[femaleNames.length-1];
-        femaleNames.pop();
-
-        return nameOut;
+        return femaleNames[getRandom(0, femaleNames.length-1)];
     }
 }
 
 function generateSurname (gender){
-    let surnameNumber;
-    let surnameOut;
     if(gender === "male"){
-        if(maleSurnames.length === 0) {
-            console.log("Error: One or more name lists are empty");
-            process.exit(1);
-        }
-        surnameNumber = getRandom(0, maleSurnames.length-1);
-        surnameOut = maleSurnames[surnameNumber];
-        maleSurnames[surnameNumber] = maleSurnames[maleSurnames.length-1];
-        maleSurnames.pop();
-        return surnameOut;
+        return maleSurnames[getRandom(0, maleSurnames.length-1)];
     }
 
     else{
-
-        if(femaleSurnames.length === 0) {
-            console.log("Error: One or more name lists are empty");
-            process.exit(1);
-        }
-        surnameNumber = getRandom(0, femaleSurnames.length-1);
-        surnameOut = femaleSurnames[surnameNumber];
-        femaleSurnames[surnameNumber] = femaleSurnames[femaleSurnames.length-1];
-        femaleSurnames.pop();
-        return surnameOut;
+        return femaleSurnames[getRandom(0, femaleSurnames.length-1)];
     }
 }
 
@@ -168,20 +112,18 @@ export function main(dtoIn) {
 
     ]
     for (let i =0; i < dtoIn.count; i++) {
-        dtoOut[i] = generateEmployee(dtoIn.age.min, dtoIn.age.max,i);
-    }
-        /*for (let j =0; j < i; j++) {                                            //kontrola stejného jména, přijmení a data narození
+        dtoOut[i] = generateEmployee(dtoIn.age.min, dtoIn.age.max, i);
+        for (let j = 0; j < i; j++) {                                            //kontrola stejného jména, přijmení a data narození
             let samePerson = {
                 sameName: dtoOut[i].name === dtoOut[j].name,
                 sameSurname: dtoOut[i].surname === dtoOut[j].surname,
-                sameBirthdate: dtoOut[i].birthdate===dtoOut[j].birthdate,
+                sameBirthdate: dtoOut[i].birthdate === dtoOut[j].birthdate,
             }
             if (samePerson.sameName && samePerson.sameSurname && samePerson.sameBirthdate) { // pokud se jedná o stejnou osobu, vygeneruje se osoba na pozici "i" znovu
-                dtoOut[i]=generateEmployee(dtoIn.age.min, dtoIn.age.max);
-                j=-1; // restart kontrolního cyklu for, po ukončení tohoto běhu se automaticky j zvedne na 0, a aby se nově vytvořený zaměstnanace porovnal se všemi už vytvořenými
-            }*/
-
-
+                dtoOut[i] = generateEmployee(dtoIn.age.min, dtoIn.age.max,i);
+                j = -1; // restart kontrolního cyklu for, po ukončení tohoto běhu se automaticky j zvedne na 0, a aby se nově vytvořený zaměstnanace porovnal se všemi už vytvořenými
+            }
+        }
+    }
     return dtoOut;
 }
-
