@@ -1,3 +1,10 @@
+import { 
+    maleNames, 
+    femaleNames, 
+    maleSurnames, 
+    femaleSurnames 
+} from '.src/listsOfNames.js';
+
 /**
  * Functions for generating employee data (Name, Surname, Birthdate, Workload, etc.).
  */
