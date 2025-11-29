@@ -1,8 +1,4 @@
 import {
-    maleNames,
-    femaleNames, 
-    maleSurnames,
-    femaleSurnames,
     getRandom,
     setEmployeeGender, 
     generateName,
