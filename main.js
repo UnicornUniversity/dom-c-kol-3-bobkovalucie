@@ -1,11 +1,11 @@
 import {
     getRandom,
     setEmployeeGender,
-    generateName, 
-    generateSurname, 
+    generateName,
+    generateSurname,
     setWorkload,
-    generateBirthDay
- } from ¸'./src/generatingFunctions.js'
+    generateBirthdate 
+} from './src/generatingFunctions.js';
 
 /**
  * Generates a list of employees with randomly generated data. Every employee has its gender, name, surname, birthdate and workload.
