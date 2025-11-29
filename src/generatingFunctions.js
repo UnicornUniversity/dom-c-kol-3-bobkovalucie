@@ -8,7 +8,7 @@
  * @param {number} max - the maximum possible value.
  * @returns {number} - the randomly generated integer.
  */
-function getRandom (min, max){
+export function getRandom (min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -16,7 +16,7 @@ function getRandom (min, max){
  * Randomly determines the employee's gender.
  * @returns {string} - the generated gender.
  */
-function setEmployeeGender() {
+export function setEmployeeGender() {
     const genderNumber = getRandom(0,1);
     if (genderNumber === 1) {
         return "male";
@@ -31,7 +31,7 @@ function setEmployeeGender() {
  * @param {string} gender - the gender of the employee.
  * @returns {string} - the randomly selected first name.
  */
-function generateName (gender) {
+export function generateName (gender) {
     if(gender === "male"){
         return maleNames[getRandom(0, maleNames.length-1)];
         }
@@ -45,7 +45,7 @@ function generateName (gender) {
  * @param {string} gender - the gender of the employee.
  * @returns {string} - the randomly selected surname.
  */
-function generateSurname (gender){
+export function generateSurname (gender){
     if(gender === "male"){
         return maleSurnames[getRandom(0, maleSurnames.length-1)];
     }
@@ -59,7 +59,7 @@ function generateSurname (gender){
  * Randomly determines the employee's workload (10, 20, 30, 40 hours/week).
  * @returns {number} - the generated workload in hours/week.
  */
-function setWorkload(){
+export function setWorkload(){
     return (getRandom(1,4)*10);  // Multiplies random number (1 to 4) by 10
 }
 
@@ -69,7 +69,7 @@ function setWorkload(){
  * @param {number} maxAge - maximum age constraint.
  * @returns {string} - the generated birthdate in ISO format.
  */
- function generateBirthdate(minAge,maxAge){
+ export function generateBirthdate(minAge,maxAge){
     const today = new Date()
     const todayInMilliseconds = today.getTime();
 
