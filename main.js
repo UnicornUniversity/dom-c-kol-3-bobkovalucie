@@ -5,7 +5,6 @@
  * Generates a list of employees with randomly generated data. Every employee has its gender, name, surname, birthdate and workload.
  * Number of generated employees is assigned in the input (dtoIn.count)
  * The birthdate is generated to match the age limit specified in the input (dtoIn.age.min and dtoIn.age.max).
- * It ensures that no two employees share the exact combination of name + surname + birthdate (day/month/year).
  * @param {object} dtoIn contains count of employees, age limit of employees {min, max}
  * @returns {Array} of employees
  */
@@ -44,12 +43,20 @@ const dtoIn = {
     }
 }
 
-// Generates a random integer between min and max (inclusive).
+/**
+ * Generates a random integer between min and max (inclusive).
+ * @param {number} min - the minimum possible value.
+ * @param {number} max - the maximum possible value.
+ * @returns {number} - the randomly generated integer.
+ */
 function getRandom (min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//Randomly determines the employee's gender (male/female).
+/**
+ * Randomly determines the employee's gender.
+ * @returns {string} - the generated gender.
+ */
 function setEmployeeGender() {
     const genderNumber = getRandom(0,1);
     if (genderNumber === 1) {
@@ -60,7 +67,11 @@ function setEmployeeGender() {
     }
 }
 
-//Returns randomly selected name from the list of male/female names based on the gender.
+/**
+ * Returns randomly selected name from the list of male/female names based on the gender.
+ * @param {string} gender - the gender of the employee.
+ * @returns {string} - the randomly selected first name.
+ */
 function generateName (gender) {
     if(gender === "male"){
         return maleNames[getRandom(0, maleNames.length-1)];
@@ -70,7 +81,11 @@ function generateName (gender) {
     }
 }
 
-//Returns randomly selected surname from the list of male/female surnames based on the gender.
+/**
+ * Returns randomly selected surname from the list of male/female surnames based on the gender.
+ * @param {string} gender - the gender of the employee.
+ * @returns {string} - the randomly selected surname.
+ */
 function generateSurname (gender){
     if(gender === "male"){
         return maleSurnames[getRandom(0, maleSurnames.length-1)];
@@ -81,13 +96,20 @@ function generateSurname (gender){
     }
 }
 
-
-//Randomly determines the employee's workload in hours/week (10, 20, 30, 40 hours/week).
+/**
+ * Randomly determines the employee's workload (10, 20, 30, 40 hours/week).
+ * @returns {number} - the generated workload in hours/week.
+ */
 function setWorkload(){
     return (getRandom(1,4)*10);  // Multiplies random number (1 to 4) by 10
 }
 
-//Generates a random birthdate within the specified age range specified in (minAge, maxAge), returned as an ISO Date-Time string.
+/**
+ * Generates a random birthdate within the specified age range, returned as an ISO Date-Time string.
+ * @param {number} minAge - minimum age constraint.
+ * @param {number} maxAge - maximum age constraint.
+ * @returns {string} - the generated birthdate in ISO format.
+ */
 function generateBirthday(minAge,maxAge){
     const today = new Date()
     const todayInMilliseconds = today.getTime();
@@ -99,7 +121,12 @@ function generateBirthday(minAge,maxAge){
     return new Date(getRandom(minDate,maxDate)).toISOString(); // Returns random time between min and max date boundaries
 }
 
-//Creates a single Employee object with all fields randomly generated.
+/**
+ * Creates a single Employee object with all fields randomly generated.
+ * @param {number} minAge - minimum age constraint.
+ * @param {number} maxAge - maximum age constraint.
+ * @returns {object} - the generated Employee object.
+ */
 function generateEmployee(minAge,maxAge){
 
     // Initial employee object structure
@@ -120,7 +147,11 @@ function generateEmployee(minAge,maxAge){
     return employee;
 }
 
-//The main function which generates a list of unique employees according to dtoIn data.
+/**
+ * The main function which generates a list of unique employees according to dtoIn data.
+ * @param {object} dtoIn contains count of employees, age limit of employees {min, max}
+ * @returns {Array} of employees
+ */
 export function main(dtoIn) {
     const dtoOut = [
     ]
@@ -131,31 +162,8 @@ export function main(dtoIn) {
         // Generate a new employee record
         dtoOut[i] = generateEmployee(dtoIn.age.min, dtoIn.age.max);
 
-        // Inner loop to check the newly generated employee (dtoOut[i]) against all previously generated employees (dtoOut[j] where j < i).
-        for (let j = 0; j < i; j++) {
-
-            // Object to store the comparison results
-            let samePerson = {
-                sameName: dtoOut[i].name === dtoOut[j].name,
-                sameSurname: dtoOut[i].surname === dtoOut[j].surname,
-                sameBirthdate: {
-                    sameDay: new Date(dtoOut[i].birthdate).getDate() === new Date(dtoOut[j].birthdate).getDate(),  // Compare day only
-                    sameMonth: new Date(dtoOut[i].birthdate).getMonth() === new Date(dtoOut[j].birthdate).getMonth(), // Compare month only
-                    sameYear: new Date(dtoOut[i].birthdate).getFullYear() === new Date(dtoOut[j].birthdate).getFullYear()  // Compare year only
-                }
-            }
-
-            // Check for duplicity: name and surname and birthdate (D/M/Y).
-            if (samePerson.sameName && samePerson.sameSurname && samePerson.sameBirthdate.sameDay && samePerson.sameBirthdate.sameMonth && samePerson.sameBirthdate.sameYear) {
-
-                // Duplicity found: Regenerate the employee at the current position 'i'.
-                dtoOut[i] = generateEmployee(dtoIn.age.min, dtoIn.age.max,i);
-
-                // Reset the inner loop counter to -1.
-                // When the loop finishes its current iteration, j will become 0, ensuring the newly generated employee is compared against ALL previous employees.
-                j = -1;
-            }
-        }
     }
     return dtoOut;
 }
+
+console.log(main(dtoIn));
