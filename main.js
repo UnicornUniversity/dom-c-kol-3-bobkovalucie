@@ -1,10 +1,11 @@
 import {
     getRandom,
-    setEmployeeGender,
+    setEmployeeGender, 
     generateName,
     generateSurname,
     setWorkload,
-    generateBirthdate 
+    generateBirthdate,
+    generateEmployee
 } from './src/generatingFunctions.js';
 
 /**
