@@ -3,7 +3,7 @@ import {
     femaleNames, 
     maleSurnames, 
     femaleSurnames 
-} from '.src/listsOfNames.js'; 
+} from './listsOfNames.js'; 
 
 /**
  * Functions for generating employee data (Name, Surname, Birthdate, Workload, etc.).
