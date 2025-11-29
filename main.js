@@ -12,14 +12,6 @@ import {
     generateEmployee
 } from './src/generatingFunctions.js';
 
-import { 
-    maleNames, 
-    femaleNames, 
-    maleSurnames, 
-    femaleSurnames 
-} from './src/listsOfNames.js'; 
-
-
 /**
  * Generates a list of employees with randomly generated data. Every employee has its gender, name, surname, birthdate and workload.
  * Number of generated employees is assigned in the input (dtoIn.count)
