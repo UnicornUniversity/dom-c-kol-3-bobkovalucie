@@ -1,14 +1,5 @@
 /**
  * Functions for generating employee data (Name, Surname, Birthdate, Workload, etc.).
- * These functions are used by the main application logic (e.g., main.js) to create randomized employee records.
- * Exports: 
- * - getRandom
- * - setEmployeeGender
- * - generateName
- * - generateSurname
- * - setWorkload
- * - generateBirthday
- * - generateEmployee
  */
 
 /**
