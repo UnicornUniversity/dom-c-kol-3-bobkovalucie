@@ -1,3 +1,4 @@
+// Load static arrays containing all available names and surnames.
 
 export const maleNames = [
     "Jan", "Petr", "Josef", "Pavel", "Martin", "Tomáš", "Jaroslav",
