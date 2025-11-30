@@ -87,7 +87,6 @@ export function generateBirthday(minAge,maxAge){
     birthdate.setHours(0, 0, 0, 0);
     return birthdate.toISOString(); // Returns random date between min and max date boundaries
 }
-}
 
 /**
  * Creates a single Employee object with all fields randomly generated.
