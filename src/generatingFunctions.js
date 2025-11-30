@@ -76,7 +76,7 @@ export function setWorkload(){
  * @param {number} maxAge - maximum age constraint.
  * @returns {string} - the generated birthdate in ISO format.
  */
-export function generateBirthday(minAge,maxAge){
+export function generateBirthdate(minAge,maxAge){
     const today = new Date()
     const todayInMilliseconds = today.getTime();
 
