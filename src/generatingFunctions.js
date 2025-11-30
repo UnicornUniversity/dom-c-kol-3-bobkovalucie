@@ -80,12 +80,12 @@ export function generateBirthdate(minAge,maxAge){
     const today = new Date()
     const todayInMilliseconds = today.getTime();
 
-    // Calculate time boundaries in milliseconds, use 365.25 to account for leap years
+   // Calculate time boundaries in milliseconds, use 365.25 to account for leap years
     const maxDate = todayInMilliseconds - maxAge*365.25*24*60*60*1000;  // Max date (oldest possible birthdate, minAge means youngest person)
     const minDate = todayInMilliseconds - minAge*365.25*24*60*60*1000;  // Min date (youngest possible birthdate, maxAge means oldest person)
     const birthdate = new Date(getRandom(minDate,maxDate));
-    birthdate.setHours(0, 0, 0, 0);
-    return birthdate.toISOString(); // Returns random date between min and max date boundaries
+    birthdate.setHours(0,0,0,0);
+    return birthdate.toISOString();// Returns random date between min and max date boundaries
 }
 
 /**
