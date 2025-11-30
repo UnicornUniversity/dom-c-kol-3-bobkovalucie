@@ -6,7 +6,7 @@ import {
 } from './listsOfNames.js'; 
 
 /**
- * Functions for generating employee data (Name, Surname, Birthdate, Workload, etc.).
+ * Functions for generating employee data (name, surname, birthdate, workload, etc.).
  */
 
 /**
@@ -21,10 +21,10 @@ export function getRandom (min, max){
 
 /**
  * Randomly determines the employee's gender.
- * @returns {string} - the generated gender.
+ * @returns {string} - the generated gender ("male" or "female").
  */
 export function setEmployeeGender() {
-    const genderNumber = getRandom(0,1);
+    const genderNumber = getRandom(0, 1);
     if (genderNumber === 1) {
         return "male";
     }
@@ -38,7 +38,7 @@ export function setEmployeeGender() {
  * @param {string} gender - the gender of the employee.
  * @returns {string} - the randomly selected first name.
  */
-export function generateName (gender) {
+export function generateName (gender){
     if(gender === "male"){
         return maleNames[getRandom(0, maleNames.length-1)];
         }
@@ -67,22 +67,32 @@ export function generateSurname (gender){
  * @returns {number} - the generated workload in hours/week.
  */
 export function setWorkload(){
-    return (getRandom(1,4)*10);  // Multiplies random number (1 to 4) by 10
+    return (getRandom(1, 4)*10);  // Multiplies random number (1 to 4) by 10
 }
 
 /**
  * Generates a random birthdate within the specified age range, returned as an ISO Date-Time string.
+ * Removes the used day from possibleDays array to ensure uniqueness.
  * @param {number} minAge - minimum age constraint.
  * @param {number} maxAge - maximum age constraint.
+ * @param {Array} possibleDays - array of available days to choose from (modified in place).
  * @returns {string} - the generated birthdate in ISO format.
  */
 
-export function generateBirthdate(minAge,maxAge, possibleDays){
+export function generateBirthdate(minAge, maxAge, possibleDays){
+    // Check if there are any days left
+    if (possibleDays.length === 0) {
+        throw new Error('No more unique birthdates available');
+    }
+    
     const today = new Date();   // Get current date
     today.setUTCHours(0, 0, 0, 0);  // Set time to midnight
-
-    const randomPosition = getRandom(0,possibleDays.length-1);
+   
+    // Select random position in the array
+    const randomPosition = getRandom(0,possibleDays.length - 1);
     const randomDay = possibleDays[randomPosition];
+
+    // Remove used day by swapping with last element and popping
     possibleDays[randomPosition] = possibleDays[possibleDays.length-1];
     possibleDays.pop();
 
@@ -100,12 +110,13 @@ export function generateBirthdate(minAge,maxAge, possibleDays){
  * Creates a single Employee object with all fields randomly generated.
  * @param {number} minAge - minimum age constraint.
  * @param {number} maxAge - maximum age constraint.
+ * @param {Array} possibleDays - array of available days to choose from.
  * @returns {object} - the generated Employee object.
  */
-export function generateEmployee(minAge,maxAge, possibleDays){
+export function generateEmployee(minAge, maxAge, possibleDays){
 
     // Initial employee object structure
-    let employee = {
+    const employee = {
         gender: undefined,
         name: undefined,
         surname: undefined,
