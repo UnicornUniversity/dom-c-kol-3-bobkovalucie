@@ -7,8 +7,8 @@ const dtoIn = {
     age: {
         min: 35,
         max: 85
-    };
-}
+    }
+};
 
 /**
  * Generates a list of employees with randomly generated data.
