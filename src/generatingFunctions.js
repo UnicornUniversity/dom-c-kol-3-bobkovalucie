@@ -77,7 +77,7 @@ export function setWorkload(){
  * @returns {string} - the generated birthdate in ISO format.
  */
 
-function generateBirthdate(minAge,maxAge, possibleDays){
+export function generateBirthdate(minAge,maxAge, possibleDays){
     const today = new Date();   // Get current date
     today.setUTCHours(0, 0, 0, 0);  // Set time to midnight
 
