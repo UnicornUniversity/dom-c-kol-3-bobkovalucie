@@ -26,6 +26,7 @@ const dtoIn = {
 
 
 export function main(dtoIn) {
+     const dtoOut = [];
     
    // Generate array of all possible days in the age range
     let availableDays = [];
