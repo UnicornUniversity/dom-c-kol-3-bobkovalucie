@@ -76,20 +76,25 @@ export function setWorkload(){
  * @param {number} maxAge - maximum age constraint.
  * @returns {string} - the generated birthdate in ISO format.
  */
+const possibleDays = [];
+for (let i = Math.floor(dtoIn.age.min*365.25); i <= Math.floor(dtoIn.age.max * 365.25); i++) {
+    possibleDays.push(i);
+}
+
 export function generateBirthdate(minAge,maxAge){
   const today = new Date();   // Get current date
-    today.setHours(0, 0, 0, 0);  // Set time to midnight
+    today.setUTCHours(0, 0, 0, 0);  // Set time to midnight
 
-    // Calculate age boundaries in days (1 year = 365.25 days for leap years)
-    const maxDays = maxAge * 365.25;
-    const minDays = minAge * 365.25;
+    const randomPosition = getRandom(0, possibleDays.length-1);
+    const randomDay = possibleDays[randomPosition];
+    possibleDays[randomPosition] = possibleDays[possibleDays.length - 1];
+    possibleDays.pop();
 
-    const randomDays = getRandom(minDays, maxDays);   // Generate random number of days within the age range
 
     // Create birthdate by subtracting random days from today
     const birthdate = new Date(today);
-    birthdate.setDate(today.getDate() - randomDays);
-    
+    birthdate.setDate(today.getDate() - randomDay);
+
     // Return date in ISO 8601 format
     return birthdate.toISOString();
 }
