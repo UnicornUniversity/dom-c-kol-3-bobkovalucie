@@ -44,7 +44,7 @@ export function main(dtoIn) {
     
     // Loop to generate the total required number of employees (dtoIn.count)
     for (let i =0; i < dtoIn.count; i++) {
-        dtoOut.push(generateEmployee(dtoIn.age.min, dtoIn.age.max, availableDays));  
+        dtoOut[i] = (generateEmployee(dtoIn.age.min, dtoIn.age.max, availableDays));  
     }
     return dtoOut;
 }
