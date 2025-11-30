@@ -77,15 +77,21 @@ export function setWorkload(){
  * @returns {string} - the generated birthdate in ISO format.
  */
 export function generateBirthdate(minAge,maxAge){
-    const today = new Date()
-    const todayInMilliseconds = today.getTime();
+  const today = new Date();   // Get current date
+    today.setHours(0, 0, 0, 0);  // Set time to midnight
 
-   // Calculate time boundaries in milliseconds, use 365.25 to account for leap years
-    const maxDate = todayInMilliseconds - maxAge*365.25*24*60*60*1000;  // Max date (oldest possible birthdate, minAge means youngest person)
-    const minDate = todayInMilliseconds - minAge*365.25*24*60*60*1000;  // Min date (youngest possible birthdate, maxAge means oldest person)
-    const birthdate = new Date(getRandom(minDate,maxDate));
-    birthdate.setHours(0,0,0,0);
-    return birthdate.toISOString();// Returns random date between min and max date boundaries
+    // Calculate age boundaries in days (1 year = 365.25 days for leap years)
+    const maxDays = maxAge * 365.25;
+    const minDays = minAge * 365.25;
+
+    const randomDays = getRandom(minDays, maxDays);   // Generate random number of days within the age range
+
+    // Create birthdate by subtracting random days from today
+    const birthdate = new Date(today);
+    birthdate.setDate(today.getDate() - randomDays);
+    
+    // Return date in ISO 8601 format
+    return birthdate.toISOString();
 }
 
 /**
