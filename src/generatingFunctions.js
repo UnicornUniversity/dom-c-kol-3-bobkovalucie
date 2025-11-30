@@ -76,18 +76,14 @@ export function setWorkload(){
  * @param {number} maxAge - maximum age constraint.
  * @returns {string} - the generated birthdate in ISO format.
  */
-const possibleDays = [];
-for (let i = Math.floor(dtoIn.age.min*365.25); i <= Math.floor(dtoIn.age.max * 365.25); i++) {
-    possibleDays.push(i);
-}
 
-export function generateBirthdate(minAge,maxAge){
-  const today = new Date();   // Get current date
+function generateBirthdate(minAge,maxAge, possibleDays){
+    const today = new Date();   // Get current date
     today.setUTCHours(0, 0, 0, 0);  // Set time to midnight
 
-    const randomPosition = getRandom(0, possibleDays.length-1);
+    const randomPosition = getRandom(0,possibleDays.length-1);
     const randomDay = possibleDays[randomPosition];
-    possibleDays[randomPosition] = possibleDays[possibleDays.length - 1];
+    possibleDays[randomPosition] = possibleDays[possibleDays.length-1];
     possibleDays.pop();
 
 
@@ -99,19 +95,20 @@ export function generateBirthdate(minAge,maxAge){
     return birthdate.toISOString();
 }
 
+
 /**
  * Creates a single Employee object with all fields randomly generated.
  * @param {number} minAge - minimum age constraint.
  * @param {number} maxAge - maximum age constraint.
  * @returns {object} - the generated Employee object.
  */
-export function generateEmployee(minAge,maxAge){
+export function generateEmployee(minAge,maxAge, possibleDays){
 
     // Initial employee object structure
     let employee = {
+        gender: undefined,
         name: undefined,
         surname: undefined,
-        gender: undefined,
         birthdate: undefined,
         workload: undefined,
     }
@@ -119,7 +116,7 @@ export function generateEmployee(minAge,maxAge){
     employee.gender = setEmployeeGender();
     employee.name = generateName(employee.gender);
     employee.surname = generateSurname(employee.gender);
-    employee.birthdate = generateBirthdate(minAge, maxAge);
+    employee.birthdate = generateBirthdate(minAge, maxAge, possibleDays);
     employee.workload = setWorkload();
 
     return employee;
